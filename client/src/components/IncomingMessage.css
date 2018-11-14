@@ -1,0 +1,16 @@
+.incoming-message {
+  list-style: none;
+}
+
+.imcoming-message_user {
+  margin-bottom: 0;
+}
+
+.imcoming-message_time {
+  color: rgb(148, 148, 148);
+  margin-left: 0.8rem;
+}
+
+.imcoming-message_text {
+  margin-top: 0px;
+}
