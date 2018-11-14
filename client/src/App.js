@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 import IncomingMessages from './components/IncomingMessages';
 import Form from './components/Form';
+import Introduction from './components/Introduction';
 import './App.css';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
       response: null,
       text: '',
       incomingMessages: [],
+      username: ''
     }
     this.socket = io("http://127.0.0.1:3001");
     this.element = React.createRef();
@@ -26,11 +28,11 @@ class App extends Component {
       this.setState({ incomingMessages: [...this.state.incomingMessages, location] })
     });
 
-    this.scrollToBottom();
+    if (this.state.username) this.scrollToBottom();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.scrollToBottom();
+    if (this.state.username) this.scrollToBottom();
   }
 
   changeTextHandler = e => {
@@ -41,7 +43,7 @@ class App extends Component {
     e.preventDefault();
 
     this.socket.emit('createMessage', {
-      from: 'User',
+      from: this.state.username,
       text: this.state.text
     }, (data) => {
       console.log(data);
@@ -63,6 +65,11 @@ class App extends Component {
     }
   }
 
+  submitNameHandler = e => {
+    e.preventDefault();
+    this.setState({ username:  e.target.username.value });
+  }
+
   // Scrolls viewport for bottom message can be always visible
   scrollToBottom = () => {
     this.element.current.scrollIntoView({ behavior: 'smooth' });
@@ -71,19 +78,29 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <IncomingMessages  
-          messages={this.state.incomingMessages}
-        />
-        <div ref={this.element}></div>
+        {
+          this.state.username ?
+            <div>
+              <IncomingMessages messages={this.state.incomingMessages} />
+              <div ref={this.element}></div>
+          
+              <footer>
+                <Form 
+                  value={this.state.text}
+                  submitTextHandler={this.submitTextHandler}
+                  changeTextHandler={this.changeTextHandler} 
+                />
+                <button onClick={this.clickGeolocationHandler}>Location</button>
+              </footer>
+            </div> :
+
+            <Introduction 
+              username={this.props.username} 
+              changeNameHandler={this.changeNameHandler} 
+              submitNameHandler={this.submitNameHandler}
+            />
+        }
         
-        <footer>
-          <Form 
-            value={this.state.text}
-            submitTextHandler={this.submitTextHandler}
-            changeTextHandler={this.changeTextHandler} 
-          />
-          <button onClick={this.clickGeolocationHandler}>Location</button>
-        </footer>
       </div>
     );
   }

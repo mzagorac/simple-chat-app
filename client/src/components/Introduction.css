@@ -1,0 +1,41 @@
+.introduction-back {
+  background-color: #310957;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+.introduction-wrapper {
+  width: 220px;
+  height: 200px;
+  border: 1px solid black;
+  padding: 25px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  vertical-align: middle;
+  background-color: white;
+  text-align: center;
+}
+
+.introduction-wrapper button {
+  margin-top: 2rem;
+  padding: 0.6rem 1rem;;
+  font-size: 1.1rem;
+  background-color: white;
+  border: 1px solid #310957;
+}
+
+.introduction-wrapper button:hover {
+  background-color: #310957;
+  color: white;
+  cursor: pointer;
+}
+
+.introduction-wrapper input {
+  width: 90%;
+  height: 1.7rem;
+  font-size: 1.2rem;
+  padding: 0.2rem;
+}

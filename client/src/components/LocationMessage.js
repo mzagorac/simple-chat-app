@@ -1,7 +1,8 @@
 import React from 'react';
+import './LocationMessage.css';
 
 const LocationMessage = props => (
-  <a href={props.location.url} target="blank">My Location</a>
+  <a className="location-message" href={props.location.url} target="blank">My Location</a>
 );
 
 
