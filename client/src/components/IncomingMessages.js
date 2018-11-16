@@ -8,7 +8,7 @@ const IncomingMessages = props => (
     {props.messages.map((message, i) =>
       message.url ?
       <LocationMessage key={i} location={message}/> :  
-      <IncomingMessage key={i} message={message} />)}
+      <IncomingMessage key={i} message={message} username={props.username} />)}
   </ul>
 );
 

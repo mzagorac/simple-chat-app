@@ -12,7 +12,7 @@ const Introduction = props => {
             name="username" 
             value={props.username}
             autoComplete="off"
-            autofocus
+            autoFocus
           />
           <button>Submit</button>
         </form>

@@ -42,6 +42,8 @@ class App extends Component {
   submitTextHandler = e => {
     e.preventDefault();
 
+    if (this.state.text.trim().length === 0) return;
+
     this.socket.emit('createMessage', {
       from: this.state.username,
       text: this.state.text
@@ -81,8 +83,11 @@ class App extends Component {
         {
           this.state.username ?
             <div>
-              <IncomingMessages messages={this.state.incomingMessages} />
-              <div ref={this.element}></div>
+              <IncomingMessages 
+                messages={this.state.incomingMessages}
+                username={this.state.username} 
+              />
+              <div ref={this.element} style={{ height: '5rem' }}></div>
           
               <footer>
                 <Form 

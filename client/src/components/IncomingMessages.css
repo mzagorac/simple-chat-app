@@ -1,3 +1,6 @@
 .messages {
   margin-bottom: 50px;
+  width: 70%;
+  padding-left: 0; 
+  margin: auto;
 }
